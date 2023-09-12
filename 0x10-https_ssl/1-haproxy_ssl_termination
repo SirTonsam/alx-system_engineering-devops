@@ -1,4 +1,5 @@
-global
+
+bal
         log /dev/log    local0
         log /dev/log    local1 notice
         chroot /var/lib/haproxy
@@ -44,7 +45,7 @@ frontend http-in
         default_backend servers
 
 frontend https-in
-        bind *:443 ssl crt /etc/haproxy/certs/www.o;isabelema.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/olisabelema.tech.pem
         http-request add-header X-Forwared-Proto https
         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
@@ -52,7 +53,7 @@ frontend https-in
 
 backend servers
         balance roundrobin
-        redirect scheme https code 301 if !{ ssl_fc }
+        redirect scheme https if !{ ssl_fc }
         server 266761-web-01 100.25.165.191:80 check
         server 266761-web-02 3.83.245.148:80 check
 
