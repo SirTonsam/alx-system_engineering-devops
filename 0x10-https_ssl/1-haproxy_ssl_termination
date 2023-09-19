@@ -1,42 +1,5 @@
-global
-<<<<<<< HEAD
-    log 127.0.0.1 local0 notice
-    maxconn 2048
-    user haproxy
-    group haproxy
 
-defaults
-    log     global
-    mode    http
-    option  httplog
-    option  dontlognull
-    retries 3
-    option redispatch
-    timeout connect  5000
-    timeout client  10000
-    timeout server  10000
-
-frontend http
-    bind *:80
-    reqadd X-Forwarded-Proto:\ http
-    default_backend app_pool
-
-frontend https
-    bind *:443 ssl crt /etc/haproxy/certs/www.thedigitalground.tech.pem
-    reqadd X-Forwarded-Proto:\ https
-    acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
-    use_backend letsencrypt-backend if letsencrypt-acl
-    default_backend app_pool
-
-backend app_pool
-    balance roundrobin
-    redirect scheme https if !{ ssl_fc }
-    server 286532-web-01 18.234.129.239 check
-    server 286532-web-02 54.237.19.91 check
-
-backend letsencrypt-backend
-    server letsencrypt 127.0.0.1:54321
-=======
+bal
         log /dev/log    local0
         log /dev/log    local1 notice
         chroot /var/lib/haproxy
@@ -82,7 +45,7 @@ frontend http-in
         default_backend servers
 
 frontend https-in
-        bind *:443 ssl crt /etc/haproxy/certs/www.o;isabelema.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/olisabelema.tech.pem
         http-request add-header X-Forwared-Proto https
         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
@@ -90,10 +53,9 @@ frontend https-in
 
 backend servers
         balance roundrobin
-        redirect scheme https code 301 if !{ ssl_fc }
+        redirect scheme https if !{ ssl_fc }
         server 266761-web-01 100.25.165.191:80 check
         server 266761-web-02 3.83.245.148:80 check
 
 backend letsencrypt-backend
    server letsencrypt 127.0.0.1:54321
->>>>>>> 0272a3e2d5ffcb197ca0807e403315f1fef432b0
