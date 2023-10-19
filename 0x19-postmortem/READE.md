@@ -56,3 +56,7 @@ Sincerely,
 [Tongai Samu]
 [Systems Administrator]
 Big Steppers IT Solutions
+
+
+find the link to the diagram below
+https://docs.google.com/document/d/14EVDV_VjKTJ6pHurOVAiCaDU9gHu97Aq_ikOLw806oY/edit?usp=sharing
